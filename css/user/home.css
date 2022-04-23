@@ -1,0 +1,13 @@
+.hero {
+    height: 470px;
+}
+
+.hero-content {
+    width: 300px;
+    top: -300px;
+    left: 100px;
+}
+
+.hero-content h1 {
+    font-size: 40px;
+}

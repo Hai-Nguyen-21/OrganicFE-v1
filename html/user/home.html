@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- banner -->
+    <div class="container mt-3">
+        <div class="row">
+            <!-- category -->
+            <div class="col-3">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="fa-solid fa-bars fs-4 me-3"></i>
+                                All departments
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li class="mb-2" style="list-style: none;"
+                                        ng-repeat="category in categories | limitTo : 10">
+                                        <a href="#!product-grid/{{category.id}}" class="lh-lg text-decoration-none text-dark">{{category.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-9">
+                <!-- search and sp -->
+                <div class="row">
+                    <div class="col-8">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="What do you need?"
+                                aria-label="What do you need?" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary text-uppercase" type="button"
+                                id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-phone fs-3 text-success mt-1"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="fs-6 fw-bold mb-0">0977256375</p>
+                                support 24/7 time
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero">
+                    <img src="../assets/banner.jpg" alt="">
+                    <div class="hero-content position-relative">
+                        <p class="fw-bold text-uppercase text-success">fruit fresh</p>
+                        <h1 class="fw-bolder">Vegetable 100% Organic</h1>
+                        <p class="fw-light">Free Pickup and Delivery Available</p>
+                        <button class="btn btn-success text-uppercase">shop now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Product -->
+    <div class="container mt-3">
+        <div class="featured-header text-center">
+            <h2 class="fw-bold">Featured Product</h2>
+            <div class="placeholder col-1 placeholder-xs bg-success"></div>
+        </div>
+        <div class="featured-body mt-4">
+            <div class="row">
+                <div class="col-3 mb-3" ng-repeat="item in featureds">
+                    <div class="featured-body_item text-center">
+                        <div class="featured-body_item-img" style="min-height: 30%;">
+                            <img width="70%" style="min-height: 185px;" src="{{item.image}}" alt="">
+                        </div>
+                        <div class="featured-body_item-info">
+                            <p><a class="text-dark" href="#!product-detail/{{item.id_product}}"
+                                    style="text-decoration: none;">{{item.name_product}}</a>
+                            </p>
+                            <p class="fw-bold">{{item.price | currency:"₫"}}</p>
+                        </div>
+                        <div class="featured-body_item-footer">
+                            <button class="btn btn-outline-danger" ng-click="addToFav(item.id_product)">
+                                <i class="fa-regular fa-heart fs-4"></i>
+                            </button>
+                            <button class="btn btn-outline-danger" ng-click="addToCart(item.id_product)">
+                                <i class="fa-solid fa-cart-plus fs-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- banner 2 -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-6">
+                <img src="../assets/banner/banner-1.jpg" alt="">
+            </div>
+            <div class="col-6">
+                <img src="../assets/banner/banner-2.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!-- Top 3 Rated Products -->
+    <div class="container mt-5">
+        <div class="featured-header text-center">
+            <h2 class="fw-bold">Top 3 Rated Products</h2>
+            <div class="placeholder col-1 placeholder-xs bg-success"></div>
+        </div>
+        <div class="rated-products" ng-repeat="item in listUserLike | limitTo : 3">
+            <div class="rated-product--item mt-4">
+                <div class="d-flex">
+                    <div class="flex-shrink-0">
+                        <img src="{{item.imageProduct}}" width="170px" alt="...">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 70%;"
+                                aria-valuenow="{{item.totalLike}}" aria-valuemin="0" aria-valuemax="100">{{item.totalLike}}</div>
+                        </div>
+                        <p>{{item.nameProduct}}</p>
+                        <p class="fw-bold">{{item.priceProduct | currency:"₫"}}</p>
+                        <button class="btn btn-outline-success">Buy now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- blog -->
+    <div class="container mt-5">
+        <div class="featured-header text-center">
+            <h2 class="fw-bold">From The Blog</h2>
+            <div class="placeholder col-1 placeholder-xs bg-success"></div>
+        </div>
+        <div class="blog mt-4">
+            <div class="row">
+                <div class="col-4">
+                    <div class="blog-img">
+                        <img src="../assets/blog/blog-1.jpg" alt="">
+                    </div>
+                    <div class="blog-info mt-3">
+                        <i class="fa-solid fa-calendar-days fs-4"></i>
+                        20/3/2022
+                    </div>
+                    <div class="blog-title">
+                        <p class="fw-bold fs-5 mt-3">Cooking tips make cooking simple</p>
+                    </div>
+                    <div class="blog-de">
+                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="blog-img">
+                        <img src="../assets/blog/blog-2.jpg" alt="">
+                    </div>
+                    <div class="blog-info mt-3">
+                        <i class="fa-solid fa-calendar-days fs-4"></i>
+                        20/3/2022
+                    </div>
+                    <div class="blog-title">
+                        <p class="fw-bold fs-5 mt-3">6 ways to prepare breakfast for 30</p>
+                    </div>
+                    <div class="blog-de">
+                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="blog-img">
+                        <img src="../assets/blog/blog-3.jpg" alt="">
+                    </div>
+                    <div class="blog-info mt-3">
+                        <i class="fa-solid fa-calendar-days fs-4"></i>
+                        20/3/2022
+                    </div>
+                    <div class="blog-title">
+                        <p class="fw-bold fs-5 mt-3">Visit the clean farm in the US</p>
+                    </div>
+                    <div class="blog-de">
+                        <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.slide').hiSlide();
+    </script>
+    <script src="../../js/basejs/jquery.hislide.js"></script>
+</body>
+
+</html>

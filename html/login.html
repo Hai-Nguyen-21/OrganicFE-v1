@@ -1,0 +1,55 @@
+<div class="app-login">
+    <div class="container-login" id="container-login-id">
+        <div class="form-login form-container sign-in-container">
+            <!-- <div ng-show="isSlide"> -->
+                <form action="#" name="formLogin">
+                    <h1 class="h1">Sign in</h1>
+                    <div class="mb-3">
+                        <label for="username_login" class="form-label">User Name</label>
+                        <input type="text" required minlength="5" name="username_login" ng-model="username_login" class="form-control"
+                            id="username_login">
+                        <div ng-hide="formLogin.username_login.$valid || formLogin.username_login.$untouched || formLogin.$submitted">
+                            <small class="form-text text-danger" ng-show="formLogin.username_login.$error.required">
+                                Vui lòng nhập tên đăng nhập
+                            </small>
+                            <small class="form-text text-danger" ng-show="formLogin.username_login.$error.minlength">
+                                Tên tài khoản phải nhiều hơn 5 ký tự
+                            </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password_login" class="form-label">Password</label>
+                        <input type="password" required minlength="5" name="password_login" ng-model="password_login"
+                            id="password_login" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div ng-hide="formLogin.password_login.$valid || formLogin.password_login.$untouched || formLogin.$submitted">
+                            <small class="form-text text-danger" ng-show="formLogin.password_login.$error.required">
+                                Vui lòng nhập mật khẩu
+                            </small>
+                            <small class="form-text text-danger" ng-show="formLogin.password_login.$error.minlength">
+                                Mật khẩu phải nhiều hơn 5 ký tự
+                            </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <a class="a" href="#">Forgot your password?</a>
+                    </div>
+                    <button class="button" ng-click="login()" ng-disabled="formLogin.$invalid">Sign In</button>
+                </form>
+            <!-- </div> -->
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-right" ng-show="isSlide">
+                    <h1 class="h1">Welcome Back!</h1>
+                    <p class="p">To keep connected with us please login with your personal info</p>
+                    <button class="button ghost" ng-click="isSlide = !isSlide;">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right" ng-show="!isSlide">
+                    <h1 class="h1">Hello, Friend!</h1>
+                    <p class="p">Enter your personal details and start journey with us</p>
+                    <button class="button ghost" ng-click="isSlide = !isSlide;">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

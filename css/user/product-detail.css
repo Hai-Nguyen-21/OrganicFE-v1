@@ -1,0 +1,18 @@
+.content-btns{
+    display: flex;
+}
+
+.content-button{
+    outline: none;
+    border: none;
+    font-size: 12px;
+    background-color: #f5f5f5;
+    width: 60px;
+    height: 60px;
+}
+
+.content-addbtn{
+    outline: none;
+    border: none;
+    background-color: #7fad29;
+}

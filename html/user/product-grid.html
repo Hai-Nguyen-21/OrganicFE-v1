@@ -1,0 +1,47 @@
+<!-- banner -->
+<div class="banner">
+    <img src="../../assets/details-hero.jpg" alt="">
+    <div class="banner-content position-relative text-center">
+        <h2 class="text-white fs-1">{{category.name}}</h2>
+    </div>
+</div>
+
+<!-- content -->
+<div class="container content">
+    <div class="row">
+        <div class="col-3">
+            <h3>Lọc theo giá</h3>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-12 text-center" ng-show="isVisible">
+                    <img src="../../assets/sorry.png" alt="">
+                    <h4>Gian hàng chưa có sản phẩm, vui lòng quay lại</h4>
+                </div>
+                <div class="col-4" ng-repeat="product in productByCate">
+                    <div class="content-item text-center">
+                        <div class="content-item--image" style="min-height: 40%;">
+                            <img width="75%" style="min-height: 235px;" src="{{product.image}}" alt="">
+                        </div>
+                        <div class="content-item--info">
+                            <a href="#!product-detail/{{product.id}}" class="mt-2 text-dark text-decoration-none">{{product.name}}</a>
+                            <p class="fw-bold fs-4">{{product.price | currency:"₫"}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-4" ng-hide="!isVisible">
+            <div class="content-footer float-end">
+                <button ng-click="prev()" class="btn btn-primary btn-lg"><i class="fas fa-chevron-circle-left"></i></button>
+                <button ng-click="next()" class="btn btn-primary btn-lg"><i class="fas fa-chevron-circle-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

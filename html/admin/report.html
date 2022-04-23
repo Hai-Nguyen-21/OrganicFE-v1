@@ -1,0 +1,70 @@
+<div class="content container mt-5">
+    <div class="row">
+        <div class="col-6 content-right">
+            <div class="content-right_top p-4 bg bg-success text-dark bg-opacity-10 mb-3">
+                <div class="content-right_top_logo bg-danger p-4 rounded text-center d-inline-flex float-start me-3" style="width: 70px;">
+                    <i class="fa-solid fa-user fs-5" style="color: white;"></i>
+                </div>
+                <div class="content-right_top_info">
+                    <h4>{{totalUser}}</h4>
+                    <p>Người dùng</p>
+                </div>
+            </div>
+            <div class="content-right_bot p-4 bg bg-success text-dark bg-opacity-10">
+                <div class="content-right_top_logo bg-warning p-4 rounded text-center d-inline-flex float-start me-3" style="width: 70px;">
+                    <i class="fa-solid fa-coins fs-5" style="color: white;"></i>
+                </div>
+                <div class="content-right_top_info">
+                    <h4>{{totalMoney | currency:"₫"}}</h4>
+                    <p>Tổng tiền</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 content-mid">
+            <div class="content-mid_top p-4 bg bg-success text-dark bg-opacity-10 mb-3">
+                <div class="content-mid_top_logo bg-success p-4 rounded text-center d-inline-flex float-start me-3" style="width: 70px;">
+                    <i class="fa-solid fa-cart-shopping fs-5" style="color: white;"></i>
+                </div>
+                <div class="content-mid_top_info">
+                    <h4>{{totalOrderCompletion}}</h4>
+                    <p>Số lượng đơn hàng giao thành công</p>
+                </div>
+            </div>
+            <div class="content-mid_bot p-4 bg bg-success text-dark bg-opacity-10">
+                <div class="content-mid_top_logo bg-primary p-4 rounded text-center d-inline-flex float-start me-3" style="width: 70px;">
+                    <i class="fa-solid fa-chart-line fs-5" style="color: white;"></i>
+                </div>
+                <div class="content-mid_top_info">
+                    <h4>70</h4>
+                    <p>Số lượng đơn hàng trong tháng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container mt-5">
+            <div class="featured-header text-center">
+                <h2 class="fw-bold">Top 5 Rated Products</h2>
+                <div class="placeholder col-1 placeholder-xs bg-success"></div>
+            </div>
+            <div class="rated-products" ng-repeat="item in listUserLike | limitTo : 5">
+                <div class="rated-product--item mt-4">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <img src="{{item.imageProduct}}" width="170px" alt="...">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 70%;"
+                                    aria-valuenow="{{item.totalLike}}" aria-valuemin="0" aria-valuemax="100">{{item.totalLike}}</div>
+                            </div>
+                            <p>{{item.nameProduct}}</p>
+                            <p class="fw-bold">{{item.priceProduct | currency:"₫"}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="container content mt-5" style="min-height: 530px;">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                role="tab" aria-controls="home" aria-selected="true">Quản lý tài khoản</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" 
+                role="tab" aria-controls="contact" aria-selected="false">Thay đổi mật khẩu</button>
+        </li>
+        <li class="nav-item" role="presentation" ng-click="followOrder()">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" ng-hide="isAdmin"
+                role="tab" aria-controls="profile" aria-selected="false">Theo dõi đơn hàng</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active mt-3" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <button class="btn btn-success" ng-click="isToggle()">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <form action="" ng-show="!edit">
+                <div class="mb-3">
+                    <label class="form-label">User Name</label>
+                    <input type="text" readonly class="form-control" value="{{user.username}}">
+                </div>
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full Name</label>
+                    <input type="text" readonly class="form-control" value="{{user.fullname}}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" readonly class="form-control" value="{{user.phone}}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Address</label>
+                    <input type="text" readonly class="form-control" value="{{user.address}}">
+                </div>
+            </form>
+            <form action="" ng-show="edit">
+                <div class="mb-3">
+                    <label for="username" class="form-label">User Name</label>
+                    <input type="text" class="form-control" id="username" ng-model="edit_username">
+                </div>
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullname" ng-model="edit_fullname">
+                </div>
+                <div class="mb-3">
+                    <label for="phonenumber" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phonenumber" ng-model="edit_phone">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" ng-model="edit_address">
+                </div>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-success" type="button" ng-click="updateProfile(true, edit_id)">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="mb-3">
+                <label for="currentpass" class="form-label">Mật khẩu cũ</label>
+                <input type="password" class="form-control" id="currentpass">
+            </div>
+            <div class="mb-3">
+                <label for="newpass" class="form-label">Mật khẩu mới</label>
+                <input type="text" class="form-control" id="newpass" ng-model="new_password">
+            </div>
+            <div class="mb-3">
+                <label for="repass" class="form-label">Nhập lại mặt khẩu mới</label>
+                <input type="text" class="form-control" id="repass">
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-success" type="button" ng-click="updateProfile(false, edit_id)">Submit</button>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" ng-hide="isAdmin">
+            <div class="row mt-5">
+                <div class="col-3 mb-3" ng-repeat="o in orderOfUser">
+                    <div class="card" style="width: 18rem;" ng-hide="o.status == 'Unresolved'">
+                        <img src="../../assets/cancelled.png" ng-show="o.status == 'Fail'" alt="">
+                        <img src="../../assets/box.png" ng-hide="o.status == 'Fail'" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h6 class="card-title">Mã đơn hàng: {{o.code}}</h6>
+                            <p>{{o.createDate | date:"MM/dd/yyyy 'at' h:mma"}}</p>
+                            <p>{{o.address}}</p>
+                            <div class="card-body_button d-flex">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" ng-click="sendData(o.id, o.status)">
+                                    Chi tiết
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- model -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi tiết</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Đơn giá</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in detail">
+                            <td>{{item.nameProduct}}</td>
+                            <td>{{item.price}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.total}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td colspan="2">Tổng tiền</td>
+                            <td>{{totalCart}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button ng-show="statusOrder == 'Fail'" type="button" class="btn btn-warning" ng-click="reBuy(idOrder)" data-bs-dismiss="modal">Mua lại đơn hàng</button>
+                <button ng-show="statusOrder == 'Processing'" type="button" class="btn btn-warning" ng-click="cancel(idOrder)" data-bs-dismiss="modal">Hủy đơn hàng</button>
+                <button ng-show="statusOrder == 'Shipping'" type="button" class="btn btn-warning" ng-click="seen(idOrder)" data-bs-dismiss="modal">Đã nhận được hàng</button>
+            </div>
+        </div>
+    </div>
+</div>

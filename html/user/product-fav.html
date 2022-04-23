@@ -1,0 +1,40 @@
+<!-- banner -->
+<div class="banner">
+    <img src="../../assets/details-hero.jpg" alt="">
+    <div class="banner-content position-relative text-center">
+        <h2 class="text-white fs-1">My favorites</h2>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <!-- <button ng-click="addAll()" class="btn btn-success">Thêm tất cả vào giỏ hàng</button>
+            <button ng-click="removeAll()" class="btn btn-danger">Xóa tất cả</button> -->
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col" style="width: 25%;"></th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="fav in productFav">
+                <th scope="row">{{$index + 1}}</th>
+                <td>
+                    <img src="{{fav.imageProduct}}" width="50%" alt="">
+                </td>
+                <td>{{fav.nameProduct}}</td>
+                <td>{{fav.priceProduct | currency:"₫" }}</td>
+                <td>
+                    <button class="btn btn-success" ng-click="addToCart(fav.id_product, fav.id)"><i class="fa-solid fa-cart-plus"></i></button>
+                    <button class="btn btn-danger" ng-click="remove(fav.id)"><i class="fa-solid fa-trash-can"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

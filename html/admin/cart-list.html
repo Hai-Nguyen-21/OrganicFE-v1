@@ -1,0 +1,97 @@
+<div class="container pb-5 w-auto">
+    <div class="row text-center border-style">
+        <div class="col m-3">
+            <button class="btn btn-primary" ng-click="getProcessing()">Đơn hàng mới</button>
+            <button class="btn btn-danger" ng-click="getProcessed()">Soạn hàng xong</button>
+            <button class="btn btn-info" ng-click="getShip()">Đang giao</button>
+            <button class="btn btn-success" ng-click="getCompletion()">Giao thành công</button>
+            <button class="btn btn-secondary" ng-click="getFail()">Giao thất bại</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <h5>{{title}}</h5>
+        <div class="col border-style">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã vận đơn</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in list_order">
+                        <th scope="row">{{item.code}}</th>
+                        <td>{{item.createDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                        <td>{{item.address}}</td>
+                        <td>
+                            <button class="btn btn-warning" ng-click="sendData(item.id, item.idUser)">
+                                Chi tiết
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col" ng-show="showInfo">
+            <div ng-hide="isComplation">
+                <button class="btn btn-info me-3" ng-show="isIoggle" ng-click="updateOrderToShip(idOrder)">
+                    Giao hàng
+                </button>
+                <button class="btn btn-success me-3" ng-hide="isIoggle" ng-click="updateOrderToProcessed(idOrder)">
+                    Soạn hàng xong
+                </button>
+            </div>
+            <button class="btn btn-outline-secondary float-end" ng-click="showInfo = !showInfo">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in processings">
+                        <td>{{item.nameProduct}}</td>
+                        <td>{{item.price | currency:"₫"}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.total | currency:"₫"}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">Tổng tiền</td>
+                        <td>{{totalCart | currency:"₫"}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="mt-5">
+                <div class="mb-3 row">
+                    <label for="name" class="col-sm-3 col-form-label">Họ tên</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly class="form-control-plaintext" id="name" value="{{chooseUser.fullname}}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="address" class="col-sm-3 col-form-label">Địa chỉ</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly class="form-control-plaintext" id="address"
+                            value="{{chooseUser.address}}">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="phone" class="col-sm-3 col-form-label">Số điện thoại</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly class="form-control-plaintext" id="phone" value="{{chooseUser.phone}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

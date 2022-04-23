@@ -1,0 +1,35 @@
+<div class="container pb-5 w-auto">
+    <div class="row border-style">
+        <div class="col float-start pt-4">
+            <a href="#!admin/add" class="btn btn-primary mb-3">Thêm mới</a>
+        </div>
+        <div class="col-4 float-end">
+            <p>Danh mục sản phẩm</p>
+            <select class="form-select" aria-label="Default select example" ng-model="myCategory" ng-change="getProductByCate()">
+                <option ng-repeat="cate in categories" value="{{cate.id}}">{{cate.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-3 mb-3" dir-paginate="item in products|itemsPerPage:8">
+            <div class="featured-body_item text-center">
+                <div class="featured-body_item-img" style="min-height: 30%;">
+                    <img width="70%" style="min-height: 185px;" src="{{item.image}}" alt="">
+                </div>
+                <div class="featured-body_item-info">
+                    <p><a class="text-dark" href="#!admin/product-detail/{{item.id}}"
+                            style="text-decoration: none;">{{item.name}}</a>
+                    </p>
+                    <p class="fw-bold">{{item.price | currency:"₫"}} / {{item.weight}}g</p>
+                </div>
+                <div class="featured-body_item-footer">
+                    <a href="#!admin/product-detail/{{item.id}}" class="btn btn-success">Chi tiết</a>
+                    <a href="#" class="btn btn-danger">Xóa</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <dir-pagination-controls class="paginator" max-size="20" direction-links="true" boundary-links="true"></dir-pagination-controls>
+
+</div>

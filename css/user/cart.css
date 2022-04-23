@@ -1,0 +1,19 @@
+.banner img{
+    height: 200px;
+    width: 100%;
+}
+
+.banner-content{
+    top: -115px;
+}
+
+.cart-footer-total{
+    padding: 15px;
+    background-color: #f5f5f5;
+}
+
+.input-quantity{
+    outline: none;
+    border: none;
+    width: 20px;
+}

@@ -1,0 +1,77 @@
+<!-- banner -->
+<div class="banner">
+    <img src="../../assets/details-hero.jpg" alt="">
+    <div class="banner-content position-relative text-center">
+        <h2 class="text-white fs-1">Shopping Cart</h2>
+    </div>
+</div>
+<div class="container">
+    <table class="table text-center" id="table">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 25%;">Product</th>
+                <th scope="col"></th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in cartProduct" class="animate-repeat">
+                <th scope="row">
+                    <img src="{{item.imageProduct}}"  width="50%" alt="">
+                </th>
+                <td>{{item.nameProduct}}</td>
+                <th>{{item.price | currency:"₫"}}</th>
+                <td>
+                    {{item.quantity}}
+                    <!-- <button class="btn btn-success me-2" ng-click="down(item.id)">-</button> -->
+                    <!-- <input type="text" readonly class="fs-4 text-center input-quantity" id="quantity{{item.id}}" ng-model="item.quantity"> -->
+                    <!-- <button class="btn btn-success ms-2" ng-click="up(item.id)">+</button> -->
+                </td>
+                <th>{{item.total | currency:"₫"}}</th>
+                <td>
+                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModalD" ng-click="getData(item.id)">Xóa</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+<div class="cart-footer container mt-4">
+    <div class="row">
+        <div class="col">
+            <a href="#!home" class="btn btn-lg btn-outline-primary text-uppercase">Continue shopping</a>
+        </div>
+        <div class="col cart-footer-total">
+            <h3>Cart Total</h3>
+            <hr>
+            <div class="row">
+                <div class="col">Total</div>
+                <div class="col text-danger text-end fw-bold fs-4"><input type="text" readonly class="fs-4 text-end fw-bold text-danger" style="width: 40%; outline: none; border: none;" ng-model="totalCartMoney">.000 VND</div>
+            </div>
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-primary text-uppercase" ng-click="pay()" type="button">thanh toán</button>
+              </div>
+        </div>
+    </div>
+</div>
+<!-- Modal delete-->
+<div class="modal fade" id="exampleModalD" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>Bạn có chắc muốn xóa sản phẩm này không?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" ng-click="removeItem(idD)" data-bs-dismiss="modal">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

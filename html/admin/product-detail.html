@@ -1,0 +1,77 @@
+<div class="container pb-5 w-auto">
+    <div class="row">
+        <div class="col-6">
+            <img src="{{product.image}}" alt="">
+            <!-- <input type="file" name="" class="form-control mt-3" id="" ng-show="!toggleEdit"> -->
+        </div>
+        <div class="col-5" style="margin-left: 50px;">
+            <button class="btn btn-success" ng-click="toggle()">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <form action="" ng-show="!toggleEdit">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Tên sản phẩm</label>
+                    <input type="text" class="form-control" id="name" ng-model="edit_name">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Giá sản phẩm</label>
+                    <input type="number" class="form-control" id="price" ng-model="edit_price">
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Số lượng hàng trong kho</label>
+                    <input type="number" class="form-control" id="quantity" ng-model="edit_quantity">
+                </div>
+                <div class="mb-3">
+                    <label for="weight" class="form-label">Khối lượng sản phẩm</label>
+                    <input type="number" class="form-control" id="weight" ng-model="edit_weight">
+                </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Tình trạng sản phẩm</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option ng-selected="edit_status == true" value="1">Còn hàng</option>
+                        <option ng-selected="edit_status == false" value="0">Hết hàng</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Danh mục</label>
+                    <select class="form-select" aria-label="Default select example" ng-model="edit_cate">
+                        <option ng-repeat="cate in categories" value="{{cate.id}}" ng-selected="cate.id == edit_cate ? 'selected':'' ">{{cate.name}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ng-model="edit_description"></textarea>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" ng-click="update()">Lưu</button>
+                </div>
+            </form>
+            <form action="" ng-show="toggleEdit">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Tên sản phẩm</label>
+                    <input type="text" readonly class="form-control" id="name" value="{{product.name}}">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Giá sản phẩm</label>
+                    <input type="text" readonly class="form-control" id="price" value="{{product.price}}">
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Số lượng hàng trong kho</label>
+                    <input type="text" readonly class="form-control" id="quantity" value="{{product.quantity}}">
+                </div>
+                <div class="mb-3">
+                    <label for="weight" class="form-label">Khối lượng sản phẩm</label>
+                    <input type="text" readonly class="form-control" id="weight" value="{{product.weight}}">
+                </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Tình trạng sản phẩm</label>
+                    <input type="text" readonly class="form-control" id="status" value="{{product.status ? 'Còn hàng':'Hết hàng'}}">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Mô tả</label>
+                    <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="3">{{product.description}}</textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
