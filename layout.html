@@ -344,7 +344,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <a class="a" href="#">Forgot your password?</a>
+                            <a class="a" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Forgot your password?</a>
                         </div>
                         <button class="button" ng-click="login()" ng-disabled="formLogin.$invalid">Sign In</button>
                     </form>
@@ -361,6 +361,27 @@
                         <h1 class="h1">Hello, Friend!</h1>
                         <p class="p">Enter your personal details and start journey with us</p>
                         <button class="button ghost" ng-click="isSlide = !isSlide;">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Quên mật khẩu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <code class="fs-5">Điền tên đăng nhập của bạn tại đây!</code>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="fgp" ng-model="forgotPass">
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary" ng-click="forgotPassWord()">Gửi</button>
                     </div>
                 </div>
             </div>

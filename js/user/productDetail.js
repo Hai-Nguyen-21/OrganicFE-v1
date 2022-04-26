@@ -1,6 +1,11 @@
 app.controller('productDetailUserController', function($rootScope, $scope, $http, $routeParams){
     $scope.id_product = 0;
     $scope.btnLike = false;
+    $scope.indexProductInCart = -1;
+
+    $http.get($rootScope.apiOrderDetail + $rootScope.cart.id).then(function (responese) {
+        $scope.cartProduct = eval(responese.data);
+    })
 
     $http.get($rootScope.apiProduct + $routeParams.id).then(function (responese) {
         $scope.product = eval(responese.data);
@@ -44,7 +49,7 @@ app.controller('productDetailUserController', function($rootScope, $scope, $http
         }
     }
 
-    $scope.addToCartInDetail = function(){
+    $scope.addToCartInDetail = function(id){
         if($rootScope.user == null){
             Swal.fire({
                 title: 'Chưa đăng nhập!',
@@ -56,17 +61,25 @@ app.controller('productDetailUserController', function($rootScope, $scope, $http
                 timer: 1600
             })
         } else {
-            if($rootScope.cartProduct[0].idProduct == $scope.product.id){
-                var quantity = Number($scope.value) + Number($rootScope.cartProduct[0].quantity);
-                $http.put($rootScope.apiOrderDetail + $rootScope.cartProduct[0].id, {
-                    "id": $rootScope.cartProduct[0].id,
-                    "idOrder": $rootScope.cart.id,
-                    "idProduct": $scope.product.id,
-                    "nameProduct": $scope.product.name,
-                    "imageProduct": $scope.product.image,
-                    "price": $scope.product.price,
-                    "quantity": quantity,
-                    "total": Number($scope.product.price) * quantity
+            for(let i = 0; i < $scope.cartProduct.length; i++){
+                if($scope.cartProduct[i].idProduct == id){
+                    $scope.indexProductInCart = i;
+                } else {
+                    $scope.indexProductInCart = -1;
+                }
+            }
+            if (Number($scope.indexProductInCart) >= 0) {
+                console.log($scope.cartProduct[$scope.indexProductInCart]);
+                // var quantity = Number($scope.value) + Number($scope.cartProduct[$scope.indexProductInCart].quantity);
+                $http.put($rootScope.apiOrderDetail + id, {
+                    "id": $scope.cartProduct[$scope.indexProductInCart].id,
+                    "idOrder": $scope.cartProduct[$scope.indexProductInCart].idỎder,
+                    "idProduct": $scope.cartProduct[$scope.indexProductInCart].id,
+                    "nameProduct": $scope.cartProduct[$scope.indexProductInCart].nameProduct,
+                    "imageProduct": $scope.cartProduct[$scope.indexProductInCart].imageProduct,
+                    "price": $scope.cartProduct[$scope.indexProductInCart].price,
+                    "quantity": Number($scope.value) + Number($scope.cartProduct[$scope.indexProductInCart].quantity),
+                    "total": Number($scope.product.price) * (Number($scope.value) + Number($scope.cartProduct[$scope.indexProductInCart].quantity))
                 })
             } else {
                 $http.post($rootScope.apiOrderDetail,{

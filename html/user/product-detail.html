@@ -20,7 +20,7 @@
                 <button class="content-button fs-3" ng-click="down()">-</button>
                 <input type="text" readonly class="content-button fs-3 text-center" ng-model="value">
                 <button class="content-button fs-3" ng-click="up()">+</button>
-                <button class="content-addbtn text-uppercase ms-2 p-3 text-white fw-bold" ng-click="addToCartInDetail()">Add to card</button>
+                <button class="content-addbtn text-uppercase ms-2 p-3 text-white fw-bold" ng-click="addToCartInDetail(product.id)">Add to card</button>
                 <button class="btn btn-outline-primary ms-2" ng-show="!btnLike" ng-click="addToLike()">
                     <i class="fa-solid fa-thumbs-up fs-4"></i>
                 </button>

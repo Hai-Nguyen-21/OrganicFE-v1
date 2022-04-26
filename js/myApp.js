@@ -11,6 +11,7 @@ app.run(function ($rootScope, $http) {
     $rootScope.isSlide = true;
     $rootScope.showCart = true;
     $rootScope.totalUser = 0;
+    $rootScope.forgotPass;
     
     // =================API==================
 
@@ -108,7 +109,7 @@ app.run(function ($rootScope, $http) {
                 // var cart = new Cart(responese.data.id, responese.data.name, responese.data.image, responese.data.price, responese.data.quantity, Number(responese.data.price) * Number(responese.data.quantity));
                 // console.log(cart);
                 $rootScope.item = responese.data;
-                // console.log($rootScope.item);
+                console.log($rootScope.item);
             })
             $http.get($rootScope.apiOrderDetail + $rootScope.cart.id).then(function(responese) {
                 // console.log(responese.data);
@@ -125,8 +126,10 @@ app.run(function ($rootScope, $http) {
                     let i = Number($rootScope.totalCart);
                     i++;
                     $rootScope.totalCart = i;
+                    $rootScope.item = null;
                 } else {
                     for (let i = 0; i < responese.data.length; i++) {
+                        console.log(responese.data);
                         if (responese.data[i].idProduct == id) {
                             $rootScope.itemGarbage = responese.data[i];
                             // console.log("có hàng");
@@ -158,6 +161,7 @@ app.run(function ($rootScope, $http) {
                         let i = Number($rootScope.totalCart);
                         i++;
                         $rootScope.totalCart = i;
+                        $rootScope.item = null;
                     }
                 }
             })
@@ -231,6 +235,10 @@ app.run(function ($rootScope, $http) {
                 }
             })
         }
+    }
+
+    $rootScope.forgotPassWord = function(){
+        
     }
 })
 
